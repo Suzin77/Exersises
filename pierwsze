@@ -1,0 +1,17 @@
+//Analiza skryptu JS.
+
+var spans = document.getElementsByTagName('span');
+ var workTime = 0;
+ var workDays = 0;
+ for (var i = 0; i < spans.length; i++) {
+     if (spans[i].id.lastIndexOf('rcp_time_', 0) === 0) {
+         var time = /(\d+):(\d+)/.exec( spans[i].innerHTML.substring(5));
+          workTimeForDay = Number(time[1]) + Number(time[2]/60);
+          if (workTimeForDay > 0) {
+                  workTime = workTimeForDay; // tylko ostatnia kolumna
+                  workDays++;
+          }
+     }
+ }
+ workDays--; // ostatnia kolumna to suma, więc odejmujemy 1
+ alert('Nadgodziny: ' + (workTime - workDays*8).toFixed(2));
